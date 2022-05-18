@@ -61,7 +61,7 @@ const Login = () => {
                     </div>
 
                     <input
-                        className="w-full bg-emerald-600 hover:bg-emerald-500 px-5 py-2 rounded-md text-black"
+                        className="w-full bg-emerald-600 hover:bg-emerald-500 px-5 py-2 rounded-md"
                         type="submit"
                         value="Log In"
                     />

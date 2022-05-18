@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="border-t border-white py-10">
             <div className="container text-center sm:text-left mx-auto sm:grid sm:grid-cols-3 gap-10 items-center p-2">
                 <div className="mb-5 sm:mb-0">
-                    <h2 className="text-3xl text-emerald-500 font-bold text-center">
+                    <h2 className="text-5xl text-emerald-500 font-bold text-center">
                         Up Keep
                     </h2>
                 </div>

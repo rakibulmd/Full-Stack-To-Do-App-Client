@@ -1,8 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { useSendEmailVerification } from "react-firebase-hooks/auth";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 const Register = () => {
+    const navigate = useNavigate();
+    const [createUserWithEmailAndPassword, user, loading, error] =
+        useCreateUserWithEmailAndPassword(auth);
+    const [sendEmailVerification, sending, emailVerifyError] =
+        useSendEmailVerification(auth);
+    const [updateProfile, updating, updateProfileError] =
+        useUpdateProfile(auth);
     const {
         register,
         formState: { errors },
@@ -12,7 +23,15 @@ const Register = () => {
         const name = data.name;
         const email = data.email;
         const password = data.password;
-        // handleRegister(email, password, name);
+        handleRegister(email, password, name);
+    };
+    const handleRegister = async (email, password, displayName) => {
+        await createUserWithEmailAndPassword(email, password);
+        await sendEmailVerification().then(toast("Verification email sent!"));
+        await updateProfile({ displayName });
+        // <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+        // signOut(auth);
+        navigate("/");
     };
     return (
         <div className="container mx-auto py-5">
@@ -85,7 +104,7 @@ const Register = () => {
                         )}
                     </div>
                     <input
-                        className="w-full bg-emerald-500 hover:bg-emerald-500 px-5 py-2 rounded-md text-black"
+                        className="w-full bg-emerald-500 hover:bg-emerald-500 px-5 py-2 rounded-md "
                         type="submit"
                         value="Register"
                     />
