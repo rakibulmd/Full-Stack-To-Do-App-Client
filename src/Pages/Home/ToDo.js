@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const ToDo = () => {
@@ -15,7 +16,9 @@ const ToDo = () => {
     useEffect(() => {
         const get = async () => {
             await axios
-                .get(`http://localhost:5000/myTasks?email=${user?.email}`)
+                .get(
+                    `https://up-keep-server1.herokuapp.com/myTasks?email=${user?.email}`
+                )
                 .then((response) => {
                     setTasks(response.data);
                 });
@@ -23,17 +26,22 @@ const ToDo = () => {
         get();
     }, [user, changed]);
     const handleCompleteBtn = async (id) => {
-        console.log(id);
-        await axios
-            .put(`http://localhost:5000/myTasks/${id}`)
-            .then((response) => {
-                setChanged(!changed);
-            });
+        const proceed = window.confirm("Mark as completed?");
+        if (proceed) {
+            await axios
+                .put(`https://up-keep-server1.herokuapp.com/myTasks/${id}`)
+                .then((response) => {
+                    setChanged(!changed);
+                    toast.info("Task is completed, Good Job.");
+                });
+        }
     };
     const handleDeleteBtn = async (id) => {
         const proceed = window.confirm("Are your sure to delete?");
         if (proceed) {
-            await axios.delete(`http://localhost:5000/myTasks/${id}`);
+            await axios.delete(
+                `https://up-keep-server1.herokuapp.com/myTasks/${id}`
+            );
             const rest = tasks.filter((task) => task._id !== id);
             setTasks(rest);
         }

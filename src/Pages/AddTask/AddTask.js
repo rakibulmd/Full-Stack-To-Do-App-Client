@@ -19,7 +19,7 @@ const AddTask = () => {
         console.log(data);
         const post = async () => {
             await axios
-                .post("http://localhost:5000/addTask", data)
+                .post("https://up-keep-server1.herokuapp.com/addTask", data)
                 .then(toast.success("Task add successful"));
         };
         post();
