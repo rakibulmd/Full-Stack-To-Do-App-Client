@@ -1,8 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { toast } from "react-toastify";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const [signInWithEmailAndPassword, user, loading, error] =
+        useSignInWithEmailAndPassword(auth);
     const {
         register,
         formState: { errors },
@@ -11,11 +17,31 @@ const Login = () => {
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
-        // handleSignIn(email, password);
+        handleSignIn(email, password);
     };
+    const handleSignIn = async (email, password) => {
+        await signInWithEmailAndPassword(email, password);
+    };
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+            toast.success("Signed In Successfully.", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }, [user, navigate]);
     return (
         <div className="container mx-auto">
             <div className="max-w-[500px] mx-auto py-5">
+                <h2 className="py-3 text-center text-xl">
+                    You must have to logged in to use UP KEEP
+                </h2>
                 <form
                     className="py-10 px-5 bg-gray-800 rounded-md border border-emerald-500"
                     onSubmit={handleSubmit(onSubmit)}

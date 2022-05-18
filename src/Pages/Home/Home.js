@@ -1,11 +1,12 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
+import Banner from "./Banner";
 
 const Home = () => {
-    return (
-        <div className="container">
-            <h2>This is home</h2>
-        </div>
-    );
+    const [user] = useAuthState(auth);
+    return <div>{user ? "" : <Banner></Banner>}</div>;
 };
 
 export default Home;

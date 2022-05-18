@@ -17,7 +17,14 @@ const Header = () => {
         <header className="bg-slate-900 text-white p-2 shadow-lg">
             <nav className="container mx-auto flex justify-between">
                 <h2 className="text-emerald-500 text-3xl hover:scale-105">
-                    Up Keep
+                    Up Keep{" "}
+                    {user ? (
+                        <span className="text-sm text-white">
+                            User: {user?.displayName}
+                        </span>
+                    ) : (
+                        ""
+                    )}
                 </h2>
                 {user ? (
                     <button
