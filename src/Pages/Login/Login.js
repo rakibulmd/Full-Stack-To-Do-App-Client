@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -85,7 +86,9 @@ const Login = () => {
                             </span>
                         )}
                     </div>
-
+                    <p className="text-rose-600 py-1">
+                        {error?.message.split("auth/")[1].split(")")[0]}
+                    </p>
                     <input
                         className="w-full bg-emerald-600 hover:bg-emerald-500 px-5 py-2 rounded-md"
                         type="submit"
@@ -114,6 +117,7 @@ const Login = () => {
                             </Link>{" "}
                         </p>
                     </div>
+                    <SocialLogin></SocialLogin>
                 </form>
             </div>
         </div>

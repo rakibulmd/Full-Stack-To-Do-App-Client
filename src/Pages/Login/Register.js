@@ -6,6 +6,7 @@ import auth from "../../firebase.init";
 import { useSendEmailVerification } from "react-firebase-hooks/auth";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import SocialLogin from "./SocialLogin";
 const Register = () => {
     const navigate = useNavigate();
     const [createUserWithEmailAndPassword, user, loading, error] =
@@ -119,6 +120,7 @@ const Register = () => {
                             </Link>{" "}
                         </p>
                     </div>
+                    <SocialLogin></SocialLogin>
                 </form>
             </div>
         </div>
