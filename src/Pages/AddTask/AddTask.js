@@ -26,7 +26,7 @@ const AddTask = () => {
         reset();
     };
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto p-2">
             <h2 className="text-2xl font-bold uppercase pt-10 text-center">
                 Add new task:
             </h2>

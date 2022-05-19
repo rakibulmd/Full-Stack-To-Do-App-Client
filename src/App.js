@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AddTask from "./Pages/AddTask/AddTask";
 import VerifyEmail from "./Pages/Login/VerifyEmail";
 import RequireAuth from "./Pages/Login/RequireAuth";
+import NotFound from "./Pages/Shared/NotFound/NotFound";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="/" element={<Home></Home>}></Route>
+                <Route path="/home" element={<Home></Home>}></Route>
                 <Route path="/login" element={<Login></Login>}></Route>
                 <Route path="/register" element={<Register></Register>}></Route>
                 <Route
@@ -32,6 +34,7 @@ function App() {
                     path="/verifyEmail"
                     element={<VerifyEmail></VerifyEmail>}
                 ></Route>
+                <Route path="*" element={<NotFound></NotFound>}></Route>
             </Routes>
             <Footer></Footer>
             <ToastContainer

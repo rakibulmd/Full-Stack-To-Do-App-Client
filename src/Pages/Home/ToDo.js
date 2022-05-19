@@ -48,8 +48,14 @@ const ToDo = () => {
     };
     return (
         <div className="container mx-auto p-2 py-10">
-            <h2 className="text-center">Your Tasks</h2>
-            <h2>{tasks?.length}</h2>
+            <h2 className="text-center text-emerald-500 text-3xl pb-6">
+                Your Tasks
+            </h2>
+            {tasks.length === 0 && (
+                <p className=" text-center text-xl py-6">
+                    You do not have any task to do!
+                </p>
+            )}
             {tasks.map((task) => (
                 <div
                     className="p-5 bg-gray-800 rounded-lg max-w-[700px] mx-auto py-5 mb-5"
